@@ -3,6 +3,8 @@ package com.mybatis.demomybatis.service.impl;
 import com.mybatis.demomybatis.dao.UserMapper;
 import com.mybatis.demomybatis.pojo.User;
 import com.mybatis.demomybatis.service.UserService;
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.Map;
  */
 @Service
 public class UserServiceImpl implements UserService{
+    private static final Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UserMapper userMapper;
     @Override
