@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.demomybatis.dao.UserMapper">
+    <resultMap id="userResultMap" type="com.mybatis.demomybatis.pojo.User">
+        <id column="phoneNumber" property="phoneNumber"/>
+        <result column="userName" property="userName"/>
+        <result column="userPwd" property="userPwd"/>
+        <result column="userSex" property="userSex"/>
+        <result column="userAge" property="userAge"/>
+        <result column="address" property="address"/>
+        <result column="createTime" property="createTime"/>
+    </resultMap>
+
+    <select id="selectUserById" parameterType="String"  resultType="com.mybatis.demomybatis.pojo.User">
+        select * from user where phoneNumber=#{phoneNumber}
+    </select>
+    <!-- 返回List<User> 集合   -->
+    <select id="selectUserAll" resultType="com.mybatis.demomybatis.pojo.User">
+        select * from user
+    </select>
+    <!-- 返回Map<string,User> 集合  -->
+    <select id="selectUserMapAll" resultType="map">
+        select * from user
+    </select>
+    <!-- 返回1个Map<string,User> 集合  -->
+    <select id="selectUserMapById" resultType="map">
+        select * from user where phoneNumber=#{phoneNumber}
+    </select>
+
+</mapper>
