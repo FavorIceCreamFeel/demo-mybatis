@@ -29,5 +29,16 @@
     <select id="selectUserMapById" resultType="map">
         select * from user where phoneNumber=#{phoneNumber}
     </select>
-
+    <!-- 动态SQL -->
+    <select id="selectUserByNameOrPhoneNumber" parameterType="com.mybatis.demomybatis.pojo.User" resultType="com.mybatis.demomybatis.pojo.User">
+        select *from user
+        <where>
+            <if test="userName != null">
+                userName=#{userName}
+            </if>
+            <if test="phoneNumber != null">
+                and phoneNumber = #{phoneNumber}
+            </if>
+        </where>
+    </select>
 </mapper>

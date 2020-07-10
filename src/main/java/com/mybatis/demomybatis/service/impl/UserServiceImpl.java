@@ -3,8 +3,8 @@ package com.mybatis.demomybatis.service.impl;
 import com.mybatis.demomybatis.dao.UserMapper;
 import com.mybatis.demomybatis.pojo.User;
 import com.mybatis.demomybatis.service.UserService;
-import org.mybatis.logging.Logger;
-import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
     @Override
     public List<User> selectUserAll() {
-        System.out.println("注解方式执行");
+        logger.info("注解方式执行");
         return userMapper.selectUserAll();
     }
 
     @Override
     public User selectUserById(String phoneNumber) {
-        System.out.println("Mapper方式执行");
+        logger.info("Mapper方式执行");
         return userMapper.selectUserById(phoneNumber);
     }
 
@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public Map<String, User> selectUserMapById(String phoneNumber) {
         return userMapper.selectUserMapById(phoneNumber);
+    }
+
+    @Override
+    public User selectUserByNameOrPhoneNumber(User user) {
+        return userMapper.selectUserByNameOrPhoneNumber(user);
     }
 }

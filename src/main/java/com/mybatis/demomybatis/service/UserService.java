@@ -15,4 +15,5 @@ public interface UserService {
     User selectUserById(String phoneNumber);
     Map<String,User> selectUserMapAll();
     Map<String,User> selectUserMapById(String phoneNumber);
+    User selectUserByNameOrPhoneNumber(User user);
 }

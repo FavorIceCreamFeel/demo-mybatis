@@ -23,4 +23,5 @@ public interface UserMapper {
     Map<String,User> selectUserMapAll();
     @MapKey("phoneNumber")
     Map<String,User> selectUserMapById(String phoneNumber);
+    User selectUserByNameOrPhoneNumber(User user);
 }
