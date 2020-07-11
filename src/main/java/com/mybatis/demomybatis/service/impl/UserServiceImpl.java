@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService{
     public User selectUserByNameOrPhoneNumber(User user) {
         return userMapper.selectUserByNameOrPhoneNumber(user);
     }
+
+    @Override
+    public boolean updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
 }

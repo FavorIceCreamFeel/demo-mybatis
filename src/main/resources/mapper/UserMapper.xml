@@ -30,15 +30,27 @@
         select * from user where phoneNumber=#{phoneNumber}
     </select>
     <!-- 动态SQL -->
+    <!-- if+where   -->
     <select id="selectUserByNameOrPhoneNumber" parameterType="com.mybatis.demomybatis.pojo.User" resultType="com.mybatis.demomybatis.pojo.User">
         select *from user
         <where>
-            <if test="userName != null">
+            <if test="userName != null and userName !='' ">
                 userName=#{userName}
             </if>
-            <if test="phoneNumber != null">
+            <if test="phoneNumber != null and  phoneNumber != '' " >
                 and phoneNumber = #{phoneNumber}
             </if>
         </where>
     </select>
+    <!--  if+set   -->
+    <update id="updateUser" parameterType="com.mybatis.demomybatis.pojo.User">
+        update user
+        <set>
+            <if test="userName != null and userName != ''">userName = #{userName},</if>
+            <if test="userSex != null and userSex != ''">userSex = #{userSex},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="address != null and address != ''">address = #{address}</if>
+        </set>
+        where phoneNumber =#{phoneNumber}
+    </update>
 </mapper>
