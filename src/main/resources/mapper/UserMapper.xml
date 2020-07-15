@@ -53,4 +53,19 @@
         </set>
         where phoneNumber =#{phoneNumber}
     </update>
+    <!-- if+choose   -->
+    <select id="selectUserByChoose" parameterType="com.mybatis.demomybatis.pojo.User" resultType="com.mybatis.demomybatis.pojo.User">
+        select *from user
+        <where>
+            <choose>
+                <when test="phoneNumber != null and phoneNumber != ''">
+                    phoneNumber = #{phoneNumber}
+                </when>
+                <when test="userName != null and  userName != ''">
+                    userName = #{userName}
+                </when>
+                <otherwise></otherwise>
+            </choose>
+        </where>
+    </select>
 </mapper>

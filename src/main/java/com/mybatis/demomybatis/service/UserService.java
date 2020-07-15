@@ -17,4 +17,5 @@ public interface UserService {
     Map<String,User> selectUserMapById(String phoneNumber);
     User selectUserByNameOrPhoneNumber(User user);
     boolean updateUser(User user);
+    User selectUserByChoose(User user);
 }

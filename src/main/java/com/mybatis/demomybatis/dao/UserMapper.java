@@ -15,6 +15,7 @@ import java.util.Map;
  * @time 15:22
  */
 @Mapper
+@Component
 public interface UserMapper {
 //    @Select("select *from user;")
     List<User> selectUserAll();
@@ -25,4 +26,5 @@ public interface UserMapper {
     Map<String,User> selectUserMapById(String phoneNumber);
     User selectUserByNameOrPhoneNumber(User user);
     boolean updateUser(User user);
+    User selectUserByChoose(User user);
 }
