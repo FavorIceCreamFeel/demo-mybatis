@@ -27,4 +27,9 @@ public interface UserMapper {
     User selectUserByNameOrPhoneNumber(User user);
     boolean updateUser(User user);
     User selectUserByChoose(User user);
+    User selectUserByNameOrPhoneNumberTrim(User user);
+    User selectUserByNameOrPhoneNumberTrimSQL(User user);
+    boolean updateUserTrim(User user);
+    List<User> selectUserByIds(List<String> phoneNumber);
+
 }

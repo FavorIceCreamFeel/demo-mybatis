@@ -68,4 +68,65 @@
             </choose>
         </where>
     </select>
+    <!-- trim 改写 if+where , if+set-->
+    <!--prefix 前缀 ;  prefixoverride 去掉第一个and或or ;-->
+    <select id="selectUserByNameOrPhoneNumberTrim" parameterType="com.mybatis.demomybatis.pojo.User" resultType="com.mybatis.demomybatis.pojo.User">
+        select *from user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="userName != null and userName !='' ">
+                userName=#{userName}
+            </if>
+            <if test="phoneNumber != null and  phoneNumber != '' " >
+                and phoneNumber = #{phoneNumber}
+            </if>
+        </trim>
+    </select>
+    <!-- trim 改写 if+where , if+set-->
+    <!--prefix 前缀 ;  suffixOverrides 去掉最后一个 , 号 ;-->
+    <update id="updateUserTrim" parameterType="com.mybatis.demomybatis.pojo.User">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName != null and userName != ''">userName = #{userName},</if>
+            <if test="userSex != null and userSex != ''">userSex = #{userSex},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="address != null and address != ''">address = #{address}</if>
+        </trim>
+        where phoneNumber =#{phoneNumber}
+    </update>
+    <!-- 定义SQL语句片段 -->
+    <sql id="selectUserByUserNameAndPhoneNumber">
+        <if test="userName != null and userName !='' ">
+            userName=#{userName}
+        </if>
+        <if test="phoneNumber != null and  phoneNumber != '' " >
+            and phoneNumber = #{phoneNumber}
+        </if>
+    </sql>
+    <!--引用sql片段-->
+    <!-- 引用 sql 片段，如果refid 指定的不在本文件中，那么需要在前面加上 namespace -->
+    <!-- 在这里还可以引用其他的 sql 片段 -->
+    <select id="selectUserByNameOrPhoneNumberTrimSQL" parameterType="com.mybatis.demomybatis.pojo.User" resultType="com.mybatis.demomybatis.pojo.User">
+        select *from user
+        <trim prefix="where" prefixOverrides="and | or">
+            <include refid="selectUserByUserNameAndPhoneNumber"></include>
+        </trim>
+    </select>
+    <!-- foreach 标签主要用于构建in条件，他可以在sql中对集合进行迭代-->
+    <!--
+collection ：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：List、数组、map集合，我在上面传的参数为数组，所以值为array
+item ： 表示在迭代过程中每一个元素的别名
+index ：表示在迭代过程中每次迭代到的位置（下标）
+open ：前缀
+close ：后缀
+separator ：分隔符，表示迭代时每个元素之间以什么分隔
+  			  -->
+    <select id="selectUserByIds" parameterType="list" resultType="com.mybatis.demomybatis.pojo.User">
+        select *from user
+        <where>
+            <foreach collection="list" item="phoneNumber" open="(" close=")"
+                     separator=",">
+                phoneNumber in #{phoneNumber}
+            </foreach>
+        </where>
+    </select>
 </mapper>
